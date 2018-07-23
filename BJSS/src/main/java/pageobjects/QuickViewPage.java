@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import static com.thoughtworks.selenium.SeleneseTestNgHelper.assertEquals;
+//import static com.thoughtworks.selenium.SeleneseTestNgHelper.assertEquals;
 
 public class QuickViewPage extends BaseObject {
 

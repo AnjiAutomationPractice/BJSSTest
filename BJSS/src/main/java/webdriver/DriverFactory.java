@@ -66,7 +66,8 @@ public class DriverFactory {
     }
 
     private WebDriver createFirefoxDriver() {
-        System.setProperty("webDriver.gecko.driver","C:/Automation/firefoxDriver/geckodriver.exe");
+        String projectDirectory = System.getProperty("user.dir");
+        System.setProperty("webdriver.gecko.driver", projectDirectory + "/tools/firefoxdriver/geckodriver.exe");
         driver = new FirefoxDriver();
         return driver;
     }

@@ -4,7 +4,7 @@ package pageobjects;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import static com.thoughtworks.selenium.SeleneseTestNgHelper.assertEquals;
+//import static com.thoughtworks.selenium.SeleneseTestNgHelper.assertEquals;
 
 public class AddressPage extends BaseObject {
     public AddressPage(WebDriver driver) {super(driver);}

@@ -17,8 +17,8 @@ import utilities.MultipleFramesHandle;
 import utilities.Wait;
 import java.text.DecimalFormat;
 import java.util.Collection;
-import static com.thoughtworks.selenium.SeleneseTestNgHelper.assertEquals;
 import static java.lang.System.getProperty;
+import static org.testng.Assert.assertEquals;
 import static utilities.DataFiles.csvFileAsCollectionOfStringArrays;
 
 @RunWith(Parameterized.class)
@@ -61,7 +61,7 @@ public class PurchaseItemsTest extends BaseTest {
         double total=0;
 
         //Quick view an item
-        Assert.assertEquals(home.getPageTitle(), home.expectedHomePageTitle());
+        assertEquals(home.getPageTitle(), home.expectedHomePageTitle());
         Wait.wait1sec();
         home.clickDressesButton();
         Wait.wait5sec();
@@ -97,6 +97,7 @@ public class PurchaseItemsTest extends BaseTest {
         //Add the item to your basket
         quickView.clickAddToCartButton();
         driver.switchTo().defaultContent();
+        Wait.wait1sec();
         quickView.clickProceedToCheckoutButton();
         Wait.wait1sec();
 
@@ -107,9 +108,9 @@ public class PurchaseItemsTest extends BaseTest {
         String eveningDressSizeInBasket = viewBasket.getSize("2");
         Assert.assertTrue(eveningDressSizeInBasket.endsWith("S"), "The dress size does not match" );
         String casualDressUnitPriceInBasket = viewBasket.getUnitPrice("1");
-        Assert.assertEquals(casualDressUnitPriceInBasket, expectedcasualDressUnitPrice);
+        assertEquals(casualDressUnitPriceInBasket, expectedcasualDressUnitPrice);
         String eveningDressUnitPriceInBasket = viewBasket.getUnitPrice("2");
-        Assert.assertEquals(eveningDressUnitPriceInBasket, expectedeveningDressUnitPrice );
+        assertEquals(eveningDressUnitPriceInBasket, expectedeveningDressUnitPrice );
 
         //Summary page - Check the Size is correct
         String casualDressSize = summary.getSize("3_15_0_0");
@@ -119,9 +120,9 @@ public class PurchaseItemsTest extends BaseTest {
 
         //Summary page - Check the price is correct
         String casualDressUnitPrice = summary.getUnitPrice("3_15_0");
-        Assert.assertEquals(casualDressUnitPrice, expectedcasualDressUnitPrice);
+        assertEquals(casualDressUnitPrice, expectedcasualDressUnitPrice);
         String eveningDressUnitPrice = summary.getUnitPrice("4_16_0");
-        Assert.assertEquals(eveningDressUnitPrice, expectedeveningDressUnitPrice );
+        assertEquals(eveningDressUnitPrice, expectedeveningDressUnitPrice );
 
         //Summary page - Check the total products price is equal to sum of individual products
         String casualTotalPrice = summary.getTotalPrice("3_15_0");
@@ -143,7 +144,8 @@ public class PurchaseItemsTest extends BaseTest {
         }
         DecimalFormat decimalFormat = new DecimalFormat(".##");
         double sumOfIndividualItems= (eveningDressTotalPrice+casualDressTotalPrice);
-        assertEquals(decimalFormat.format(sumOfIndividualItems),totalProductsPrice);
+        assertEquals(Double.parseDouble(decimalFormat.format(sumOfIndividualItems)),totalProductsPrice);
+
 
         //Summary page - Check the total is equal to the sum of individual products + shipping price
         try{
@@ -156,7 +158,7 @@ public class PurchaseItemsTest extends BaseTest {
         }catch (Exception e) {
             System.out.println(e);
         }
-        Assert.assertEquals(totalShippingPrice+totalProductsPrice,total );
+        assertEquals(totalShippingPrice+totalProductsPrice,total );
         summary.clickProceedToCheckOutButton();
         Wait.wait5sec();
 
@@ -167,21 +169,21 @@ public class PurchaseItemsTest extends BaseTest {
         Wait.wait5sec();
 
         //Address page
-        Assert.assertEquals(address.getPageTitle(), address.expectedAddressPageTitle());
+        assertEquals(address.getPageTitle(), address.expectedAddressPageTitle());
         address.clickProceedToCheckOutButton();
         Wait.wait5sec();
 
         //Shipping page
-        Assert.assertEquals(ship.getPageTitle(), ship.expectedShippingPageTitle() );
+        assertEquals(ship.getPageTitle(), ship.expectedShippingPageTitle() );
         Wait.wait5sec();
         ship.selectTermsOfServieCheckBox();
         ship.clickProceedToCheckOutButton();
 
         //Payment page
         payment.clickPayByBankWireButton();
-        Assert.assertEquals(payment.getPageTitle(), payment.expectedPaymentPageTitle() );
+        assertEquals(payment.getPageTitle(), payment.expectedPaymentPageTitle() );
         payment.clickConfirmMyOrderButton();
-        Assert.assertEquals(payment.getOrderSuccessMessage(), expectedOrderSuccessMessage  );
+        assertEquals(payment.getOrderSuccessMessage(), expectedOrderSuccessMessage  );
         signIn.clickSignOutButton();
 
     }

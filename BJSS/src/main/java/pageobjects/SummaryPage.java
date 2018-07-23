@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import utilities.Wait;
 
-import static com.thoughtworks.selenium.SeleneseTestNgHelper.assertEquals;
+//import static com.thoughtworks.selenium.SeleneseTestNgHelper.assertEquals;
 
 
 public class SummaryPage extends BaseObject {

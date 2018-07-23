@@ -42,8 +42,8 @@ public class SignInTest extends BaseTest {
         home.clickSignInButton();
         signIn.setEmailField(this.email);
         signIn.setPasswordField(this.password);
-        signIn.clickSignInButton();
-        assertTrue("Unsuccessful login",myAccount.isMyAccountPageIsDisplayed());
+        signIn.clickSubmitButton();
+        assertTrue("Unsuccessful login", myAccount.isMyAccountPageIsDisplayed());
 
     }
 
